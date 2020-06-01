@@ -1,0 +1,110 @@
+$h3Color: #2e878a;
+$h2Color: white;
+$h2Size: 25px;
+$blockHover: gray;
+
+@mixin createH2($lineHeight, $titleWidth) {
+	width: $titleWidth;
+	margin: 0 auto;
+	line-height: $lineHeight;
+	color: $h2Color;
+	font-size: $h2Size;
+}
+
+body {
+	width: 100%;
+	max-width: 1600px;
+	margin: 0 auto;
+	height: 100%;
+	font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+	font-size: 25px;
+}
+
+.container {
+	height: inherit;
+	width: 100%;
+	display: grid;
+	grid-template-columns: minmax(200px, 15%) 1fr 1fr 1fr;
+	grid-template-rows: 50px 1fr 60px;
+	gap: 5px 5px;
+	grid-template-areas: "sidebar header header header" "sidebar content content content" "footer footer footer footer";
+}
+
+.header { 
+	grid-area: header; 
+	background-color: cyan;
+	h2 {
+		@include createH2(50px, 360px);
+	}
+}
+
+.sidebar { 
+	grid-area: sidebar; 
+	background-color: lightgreen;
+	min-height: 450px;
+	height: inherit;
+	display: grid;	
+	gap: 10px;
+	align-content: start;
+	h3 {
+		font-size: 20px;
+		color: $h3Color;
+	}	
+}
+
+.sidebar__block {
+	background-color: violet;
+	width: 160px;
+	height: 30px;
+	border: 1px solid gray;
+	justify-self: center;
+	
+	&_red {
+		background-color: red;
+		&:hover {
+			cursor: pointer;
+			background-color: $blockHover;
+		}
+	}
+	&_green {
+		background-color: green;
+		&:hover {
+			cursor: pointer;
+			background-color: $blockHover;
+		}
+	}
+}
+.sidebar__title {
+	width: auto;
+	height: 30px;
+	line-height: 30px;
+	margin: 0 auto;
+}
+
+.content { 
+	width: auto;
+	height: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 10px;
+    justify-items: center;
+    align-items: center;
+    grid-area: content;
+    background-color: lightblue;
+}
+
+.content__block {
+	height: 150px;
+	width: 300px;
+	border: 1px solid black;
+	background-color: yellow;
+	color: red;
+}
+
+.footer { 
+	grid-area: footer;
+	background-color: limegreen; 
+	h2 {
+		@include createH2(60px, 480px);
+	}
+}
